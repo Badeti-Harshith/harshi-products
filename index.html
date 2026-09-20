@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Harshi Products</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#121a2b;
+      --text:#e8eefc;
+      --muted:#a9b4d0;
+      --accent:#6d5efc;
+      --accent2:#23c483;
+      --border: rgba(255,255,255,.10);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(109,94,252,.35), transparent 55%),
+                  radial-gradient(900px 500px at 90% 10%, rgba(35,196,131,.25), transparent 50%),
+                  var(--bg);
+      color:var(--text);
+    }
+    header{
+      position: sticky; top:0; z-index:10;
+      background: rgba(11,18,32,.7);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .wrap{max-width:1100px; margin:0 auto; padding:16px}
+    .topbar{
+      display:flex; gap:16px; align-items:center; justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; letter-spacing:.2px;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:12px;
+      background: linear-gradient(135deg, var(--accent), #9b6bff);
+      box-shadow: 0 10px 30px rgba(109,94,252,.35);
+      border:1px solid rgba(255,255,255,.15);
+    }
+    .nav{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    }
+    .nav a{
+      color:var(--muted); text-decoration:none; padding:8px 10px;
+      border:1px solid transparent; border-radius:12px;
+    }
+    .nav a:hover{border-color: var(--border); color:var(--text)}
+    .hero{
+      padding:28px 0 8px;
+    }
+    .hero-grid{
+      display:grid; grid-template-columns: 1.2fr .8fr; gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 860px){
+      .hero-grid{grid-template-columns:1fr}
+    }
+    .panel{
+      background: rgba(18,26,43,.7);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.25);
+    }
+    h1{margin:0 0 8px; font-size:28px}
+    p{margin:0}
+    .sub{color:var(--muted)}
+    .controls{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:14px;
+    }
+    input[type="search"]{
+      flex:1; min-width:220px;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      color:var(--text);
+      border-radius:14px;
+      padding:12px 12px;
+      outline:none;
+    }
+    .btn{
+      border:none; cursor:pointer;
+      padding:12px 14px;
+      border-radius:14px;
+      font-weight:700;
+      color:var(--text);
+      background: linear-gradient(135deg, rgba(109,94,252,.95), rgba(155,107,255,.95));
+      box-shadow: 0 14px 35px rgba(109,94,252,.25);
+    }
+    .btn.secondary{
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      box-shadow:none;
+      color:var(--text);
+    }
+    .small{
+      font-size:13px; color:var(--muted);
+      margin-top:10px;
+      line-height:1.4;
+    }
+
+    /* Product grid */
+    .section-title{
+      margin:18px 0 10px; font-size:18px; font-weight:800;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 980px){ .grid{grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width: 620px){ .grid{grid-template-columns: 1fr;} }
+
+    .card{
+      background: rgba(18,26,43,.7);
+      border:1px solid var(--border);
+      border-radius:18px;
+      overflow:hidden;
+      display:flex; flex-direction:column;
+      min-height: 280px;
+    }
+    .thumb{
+      height:140px;
+      background: rgba(255,255,255,.06);
+      display:flex; align-items:center; justify-content:center;
+      border-bottom: 1px solid var(--border);
+      padding:10px;
+      position:relative;
+    }
+    .thumb img{
+      max-width:100%; max-height:100%; object-fit:contain;
+      border-radius:12px;
+    }
+    .badge{
+      position:absolute; top:10px; left:10px;
+      background: rgba(109,94,252,.95);
+      border:1px solid rgba(255,255,255,.25);
+      padding:6px 10px; border-radius:999px;
+      font-size:12px; font-weight:800;
+    }
+    .card-body{
+      padding:14px;
+      display:flex; flex-direction:column;
+      gap:10px;
+      flex:1;
+    }
+    .name{
+      font-weight:900;
+      line-height:1.2;
+    }
+    .desc{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.35;
+      flex:1;
+    }
+    .links{
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .linkbtn{
+      flex:1; min-width:120px;
+      text-align:center;
+      padding:10px 10px;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:800;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+    }
+    .linkbtn.amazon{ border-color: rgba(35,196,131,.35); }
+    .linkbtn.flip{ border-color: rgba(109,94,252,.35); }
+    .linkbtn:hover{transform: translateY(-1px); transition:.15s}
+    .footer{
+      margin-top:24px; padding:22px 0 30px;
+      color:var(--muted);
+      text-align:center;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Product modal */
+    .modal-backdrop{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.6);
+      display:none; align-items:center; justify-content:center;
+      padding:16px;
+      z-index:999;
+    }
+    .modal{
+      width:min(760px, 100%);
+      background: rgba(18,26,43,.95);
+      border:1px solid var(--border);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow: 0 40px 120px rgba(0,0,0,.6);
+    }
+    .modal-header{
+      padding:14px 16px;
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    .modal-header strong{font-size:16px}
+    .close{
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      color:var(--text);
+      width:38px; height:38px; border-radius:12px;
+      cursor:pointer; font-weight:900;
+    }
+    .modal-body{
+      padding:16px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+    }
+    @media (max-width: 720px){
+      .modal-body{grid-template-columns: 1fr}
+    }
+    .modal-img{
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      border-radius:16px;
+      height:220px;
+      display:flex; align-items:center; justify-content:center;
+      padding:10px;
+    }
+    .modal-img img{max-width:100%; max-height:100%; object-fit:contain}
+    .modal-meta .muted{color:var(--muted); font-size:14px; line-height:1.5}
+    .modal-actions{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;
+    }
+    .modal-actions .linkbtn{min-width: 180px;}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap topbar">
+      <div class="brand" aria-label="Store brand">
+        <div class="logo"></div>
+        <div>
+          <div style="font-size:14px; color:var(--muted); font-weight:700; margin-bottom:2px;">Online Electronics</div>
+          <div style="font-size:20px; font-weight:900;">Harshi Products</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#" id="nav-home">Home</a>
+        <a href="#products" id="nav-products">Products</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="panel">
+          <h1>Shop Electronics—click & buy on Amazon / Flipkart</h1>
+          <p class="sub">This website shares product links. Choose your product and open the marketplace to purchase.</p>
+
+          <div class="controls">
+            <input id="search" type="search" placeholder="Search electronics (e.g., headphones, phone, router)..." />
+            <button class="btn" id="clearBtn" type="button">Clear</button>
+          </div>
+
+          <div class="small">
+            Tip: You can edit product details inside <strong>products.js</strong> (name, description, Amazon link, Flipkart link, image).
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="section-title" style="margin-top:0;">How it works</div>
+          <ol style="margin:10px 0 0; padding-left:20px; color:var(--muted); line-height:1.7;">
+            <li>Browse products</li>
+            <li>Click “Buy on Amazon” or “Buy on Flipkart”</li>
+            <li>Complete purchase on that marketplace</li>
+          </ol>
+          <div class="small" style="margin-top:12px;">
+            Add your own shipping/payment only if you do Option B (separate checkout).
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" aria-label="Products section">
+      <div class="section-title">Featured Electronics</div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <div class="footer">
+      © <span id="year"></span> Harshi Products. All product links open Amazon/Flipkart.
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="backdrop" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal-header">
+        <strong id="modalTitle">Product</strong>
+        <button class="close" id="closeBtn" type="button" aria-label="Close">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-img">
+          <img id="modalImg" alt="Product image" />
+        </div>
+
+        <div class="modal-meta">
+          <div class="muted" id="modalDesc"></div>
+          <div class="modal-actions">
+            <a id="amazonBtn" class="linkbtn amazon" href="#" target="_blank" rel="noopener noreferrer">Buy on Amazon</a>
+            <a id="flipBtn" class="linkbtn flip" href="#" target="_blank" rel="noopener noreferrer">Buy on Flipkart</a>
+          </div>
+          <div class="small" style="margin-top:10px;">
+            Note: Prices/availability are controlled by the marketplace.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./products.js"></script>
+  <script>
+    const yearEl = document.getElementById('year');
+    yearEl.textContent = new Date().getFullYear();
+
+    const grid = document.getElementById('grid');
+    const search = document.getElementById('search');
+    const clearBtn = document.getElementById('clearBtn');
+
+    const backdrop = document.getElementById('backdrop');
+    const closeBtn = document.getElementById('closeBtn');
+
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalImg = document.getElementById('modalImg');
+    const amazonBtn = document.getElementById('amazonBtn');
+    const flipBtn = document.getElementById('flipBtn');
+
+    function normalize(s){ return (s || '').toLowerCase(); }
+
+    function render(products){
+      grid.innerHTML = '';
+      if(!products.length){
+        grid.innerHTML = '<div class="panel" style="grid-column:1/-1; text-align:center;">No products found.</div>';
+        return;
+      }
+
+      products.forEach((p, idx) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="thumb">
+            <span class="badge">Electronics</span>
+            ${p.image ? `<img src="${p.image}" alt="${p.name} image" />` : `<div style="color:var(--muted); font-weight:800;">No Image</div>`}
+          </div>
+          <div class="card-body">
+            <div class="name">${p.name}</div>
+            <div class="desc">${p.description || 'Click to view and buy on Amazon/Flipkart.'}</div>
+            <div class="links">
+              <a class="linkbtn amazon" href="${p.amazonLink || '#'}" target="_blank" rel="noopener noreferrer">Buy on Amazon</a>
+              <a class="linkbtn flip" href="${p.flipkartLink || '#'}" target="_blank" rel="noopener noreferrer">Buy on Flipkart</a>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:2px;">
+              <button class="btn secondary" type="button" data-open="${idx}" style="padding:10px 12px; width:100%;">
+                View details
+              </button>
+            </div>
+          </div>
+        `;
+
+        card.querySelector('[data-open]').addEventListener('click', () => openModal(p));
+        grid.appendChild(card);
+      });
+    }
+
+    function openModal(p){
+      modalTitle.textContent = p.name;
+      modalDesc.textContent = p.description || 'Click Amazon/Flipkart to buy the product.';
+      modalImg.src = p.image || 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+        <svg xmlns="http://www.w3.org/2000/svg" width="800" height="400">
+          <rect width="100%" height="100%" fill="#121a2b"/>
+          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#a9b4d0" font-size="20" font-family="Arial">
+            No Image Provided
+          </text>
+        </svg>
+      `);
+
+      amazonBtn.href = p.amazonLink || '#';
+      flipBtn.href = p.flipkartLink || '#';
+
+      backdrop.style.display = 'flex';
+    }
+
+    function closeModal(){
+      backdrop.style.display = 'none';
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', (e) => {
+      if(e.target === backdrop) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape') closeModal();
+    });
+
+    function applyFilter(){
+      const q = normalize(search.value.trim());
+      const filtered = (window.PRODUCTS || []).filter(p => {
+        const hay = normalize(p.name + ' ' + (p.description || ''));
+        return hay.includes(q);
+      });
+      render(filtered);
+    }
+
+    search.addEventListener('input', applyFilter);
+    clearBtn.addEventListener('click', () => { search.value=''; applyFilter(); });
+
+    // Initial render
+    render(window.PRODUCTS || []);
+  </script>
+</body>
+</html>
