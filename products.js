@@ -4,7 +4,7 @@ window.PRODUCTS = [
     name: "noise airwave xr",
     description: "Short description of the product (replace this).",
     // Optional image: you can use any image URL you own/have permission to use
-    image: "document.querySelector("#container > div > div.TT5KcC")",
+    image: "https://m.media-amazon.com/images/I/61ttOStDEqL._SL1500_.jpg",
     amazonLink: "PASTE_AMAZON_LINK_HERE",
     flipkartLink: "https://dl.flipkart.com/s/8BQH0JuuuN"
   },
